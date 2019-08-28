@@ -1,0 +1,13 @@
+Package: cmapply
+Title: Apply a function across pairs of vectors
+Version: 0.0.0.9000
+Authors@R: person("David", "Ranzolin", email = "daranzolin@gmail.com", role = c("aut", "cre"))
+Description: Apply a function across pairs of vectors. Useful when the vectors are of varying lengths and cannot be coerced into a rectangle.
+Depends: R (>= 3.6.0)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    reshape2,
+    ggplot2
+RoxygenNote: 6.1.1

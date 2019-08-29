@@ -1,6 +1,6 @@
-#' Get the minimum and maximum combinations from cmapply matrix
+#' Get the minimum and maximum combinations from pmapply matrix
 #'
-#' @param combo_mat a matrix generated from `cmapply`
+#' @param combo_mat a matrix generated from `pmapply`
 #'
 #' @return a list object of class 'minmaxCombo'
 #' @export
@@ -8,7 +8,7 @@
 #' @examples
 #'\dontrun{
 #' samples <- replicate(3, sample(LETTERS, 20, replace = TRUE))
-#' sm <- cmapply(s1 = samples[,1], s2 = samples[,2], s3 = samples[,3])
+#' sm <- pmapply(s1 = samples[,1], s2 = samples[,2], s3 = samples[,3])
 #' get_minmax_combos(sm)
 #'}
 get_minmax_combos <- function(combo_mat) {
@@ -40,7 +40,7 @@ get_minmax_combos <- function(combo_mat) {
 
 #' Print the output of get_minmax_combos
 #'
-#' @param combo_mat a matrix generated from `cmapply`
+#' @param combo_mat a matrix generated from `pmapply`
 #' @name print
 NULL
 

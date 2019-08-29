@@ -8,7 +8,7 @@
 \method{print}{minmaxCombo}(combo_mat)
 }
 \arguments{
-\item{combo_mat}{a matrix generated from `cmapply`}
+\item{combo_mat}{a matrix generated from `pmapply`}
 }
 \description{
 Print the output of get_minmax_combos

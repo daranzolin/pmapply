@@ -1,21 +1,21 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# cmapply
+# pmapply
 
 <!-- badges: start -->
 
 <!-- badges: end -->
 
-The goal of cmapply is to apply a pair-wise function over a series of
+The goal of pmapply is to apply a pair-wise function over a series of
 vectors.
 
 ## Installation
 
-You can install the released version of cmapply from GitHub with:
+You can install the released version of pmapply from GitHub with:
 
 ``` r
-remotes::install_github("daranzolin/cmapply")
+remotes::install_github("daranzolin/pmapply")
 ```
 
 ## Example: What keys should I use to join my tables?
@@ -23,10 +23,10 @@ remotes::install_github("daranzolin/cmapply")
 Suppose you have several tables with varying keys. Some may match, some
 may partially match, and some may not match at all. Rather than
 rerunning `sum(key1 %in% key2)`, `sum(key2 %in% key3)`, `sum(key1 %in%
-key3)` *ad infinitum*, use `cmapply`:
+key3)` *ad infinitum*, use `pmapply`:
 
 ``` r
-library(cmapply)
+library(pmapply)
 
 generate_keys <- function(n = 1200) {
   a <- do.call(paste0, replicate(5, sample(LETTERS, n, TRUE), FALSE))
@@ -40,7 +40,7 @@ df3 <- data.frame(key = sample(keys, 1000))
 df4 <- data.frame(key = sample(keys, 1000))
 
 si <- function(x, y) sum(x %in% y)
-m <- cmapply(df1 = df1$key,
+m <- pmapply(df1 = df1$key,
              df2 = df2$key, 
              df3 = df3$key,
              df4 = df4$key,
@@ -48,10 +48,10 @@ m <- cmapply(df1 = df1$key,
              FUN = si)
 m
 #>      df1  df2  df3  df4
-#> df1 1000  832  833  831
-#> df2  832 1000  833  830
-#> df3  833  833 1000  835
-#> df4  831  830  835 1000
+#> df1 1000  840  835  836
+#> df2  840 1000  830  833
+#> df3  835  830 1000  839
+#> df4  836  833  839 1000
 ```
 
 The resulting matrix shows the total intersections between each
@@ -61,8 +61,8 @@ Get the minimum and maximum values with `get_min_max_combos`:
 
 ``` r
 get_minmax_combos(m)
-#> | Maximum combination:  df4 - df3      |  Value:  835 
-#> | Minimum combination:  df4 - df2      |  Value:  830
+#> | Maximum combination:  df2 - df1      |  Value:  840 
+#> | Minimum combination:  df3 - df2      |  Value:  830
 ```
 
 Or plot the heatmap with `combo_heatmap`:

@@ -10,8 +10,8 @@
 #' @examples
 #' samples <- replicate(3, sample(LETTERS, 20, replace = TRUE))
 #' sui <- function(x, y) sum(unique(x) %in% unique(y))
-#' sm <- cmapply(s1 = samples[,1], s2 = samples[,2], s3 = samples[,3], FUN = sui)
-cmapply <- function(FUN = function(x, y) sum(x %in% y), show = "all", ...) {
+#' sm <- pmapply(s1 = samples[,1], s2 = samples[,2], s3 = samples[,3], FUN = sui)
+pmapply <- function(FUN = function(x, y) sum(x %in% y), show = "all", ...) {
   stopifnot(show %in% c("all", "lower", "upper"))
   x <- list(...)
   m <- matrix(NA, nrow = length(x), ncol = length(x))

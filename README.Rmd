@@ -12,28 +12,28 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-# cmapply
+# pmapply
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of cmapply is to apply a pair-wise function over a series of vectors. 
+The goal of pmapply is to apply a pair-wise function over a series of vectors. 
 
 ## Installation
 
-You can install the released version of cmapply from GitHub with:
+You can install the released version of pmapply from GitHub with:
 
 ``` r
-remotes::install_github("daranzolin/cmapply")
+remotes::install_github("daranzolin/pmapply")
 ```
 
 ## Example: What keys should I use to join my tables?
 
-Suppose you have several tables with varying keys. Some may match, some may partially match, and some may not match at all. Rather than rerunning `sum(key1 %in% key2)`, `sum(key2 %in% key3)`, `sum(key1 %in% key3)` *ad infinitum*, use `cmapply`:
+Suppose you have several tables with varying keys. Some may match, some may partially match, and some may not match at all. Rather than rerunning `sum(key1 %in% key2)`, `sum(key2 %in% key3)`, `sum(key1 %in% key3)` *ad infinitum*, use `pmapply`:
 
 
 ```{r}
-library(cmapply)
+library(pmapply)
 
 generate_keys <- function(n = 1200) {
   a <- do.call(paste0, replicate(5, sample(LETTERS, n, TRUE), FALSE))
@@ -47,7 +47,7 @@ df3 <- data.frame(key = sample(keys, 1000))
 df4 <- data.frame(key = sample(keys, 1000))
 
 si <- function(x, y) sum(x %in% y)
-m <- cmapply(df1 = df1$key,
+m <- pmapply(df1 = df1$key,
              df2 = df2$key, 
              df3 = df3$key,
              df4 = df4$key,

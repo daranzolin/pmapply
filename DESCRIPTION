@@ -1,4 +1,4 @@
-Package: cmapply
+Package: pmapply
 Title: Apply a function across pairs of vectors
 Version: 0.0.0.9000
 Authors@R: person("David", "Ranzolin", email = "daranzolin@gmail.com", role = c("aut", "cre"))

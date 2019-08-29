@@ -2,23 +2,23 @@
 % Please edit documentation in R/get_minmax_combos.R
 \name{get_minmax_combos}
 \alias{get_minmax_combos}
-\title{Get the minimum and maximum combinations from cmapply matrix}
+\title{Get the minimum and maximum combinations from pmapply matrix}
 \usage{
 get_minmax_combos(combo_mat)
 }
 \arguments{
-\item{combo_mat}{a matrix generated from `cmapply`}
+\item{combo_mat}{a matrix generated from `pmapply`}
 }
 \value{
 a list object of class 'minmaxCombo'
 }
 \description{
-Get the minimum and maximum combinations from cmapply matrix
+Get the minimum and maximum combinations from pmapply matrix
 }
 \examples{
 \dontrun{
 samples <- replicate(3, sample(LETTERS, 20, replace = TRUE))
-sm <- cmapply(s1 = samples[,1], s2 = samples[,2], s3 = samples[,3])
+sm <- pmapply(s1 = samples[,1], s2 = samples[,2], s3 = samples[,3])
 get_minmax_combos(sm)
 }
 }

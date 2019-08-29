@@ -4,14 +4,14 @@
 \alias{pmapply}
 \title{Apply a function between pairs of vectors}
 \usage{
-pmapply(FUN = function(x, y) sum(x \%in\% y), show = "all", ...)
+pmapply(x, FUN = function(x, y) sum(x \%in\% y), show = "all")
 }
 \arguments{
+\item{x}{a list or data frame}
+
 \item{FUN}{the function to be applied between all possible pairs of vectors passed to ...}
 
 \item{show}{Whether to display upper or lower triangle of values--either 'all', 'upper', or 'lower'}
-
-\item{...}{named or unnamed vectors}
 }
 \value{
 a matrix
@@ -21,6 +21,8 @@ Apply a function between pairs of vectors
 }
 \examples{
 samples <- replicate(3, sample(LETTERS, 20, replace = TRUE))
-sui <- function(x, y) sum(unique(x) \%in\% unique(y))
-sm <- pmapply(s1 = samples[,1], s2 = samples[,2], s3 = samples[,3], FUN = sui)
+l <- list(samples[,1], samples[,2], samples[,3])
+pmapply(l)
+pmapply(iris[,c(1:4)], function(x, y) cor(x, y))
+pmapply(iris[,c(1:4)], function(x, y) sum(x < y))
 }

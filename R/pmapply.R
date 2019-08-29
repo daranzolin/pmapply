@@ -1,20 +1,23 @@
 #' Apply a function between pairs of vectors
 #'
+#' @param x a list or data frame
 #' @param FUN the function to be applied between all possible pairs of vectors passed to ...
 #' @param show Whether to display upper or lower triangle of values--either 'all', 'upper', or 'lower'
-#' @param ... named or unnamed vectors
 #'
 #' @return a matrix
 #' @export
 #'
 #' @examples
 #' samples <- replicate(3, sample(LETTERS, 20, replace = TRUE))
-#' sui <- function(x, y) sum(unique(x) %in% unique(y))
-#' sm <- pmapply(s1 = samples[,1], s2 = samples[,2], s3 = samples[,3], FUN = sui)
-pmapply <- function(FUN = function(x, y) sum(x %in% y), show = "all", ...) {
+#' l <- list(samples[,1], samples[,2], samples[,3])
+#' pmapply(l)
+#' pmapply(iris[,c(1:4)], function(x, y) cor(x, y))
+#' pmapply(iris[,c(1:4)], function(x, y) sum(x < y))
+pmapply <- function(x, FUN = function(x, y) sum(x %in% y), show = "all") {
   stopifnot(show %in% c("all", "lower", "upper"))
-  x <- list(...)
-  m <- matrix(NA, nrow = length(x), ncol = length(x))
+  if (!is.list(x)) x <- as.list(x)
+  ll <- length(x)
+  m <- matrix(NA, nrow = ll, ncol = ll)
   if (!is.null(names(x))) {
     n <- names(x)
     colnames(m) <- n

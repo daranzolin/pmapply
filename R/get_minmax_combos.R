@@ -7,9 +7,8 @@
 #'
 #' @examples
 #'\dontrun{
-#' samples <- replicate(3, sample(LETTERS, 20, replace = TRUE))
-#' sm <- pmapply(s1 = samples[,1], s2 = samples[,2], s3 = samples[,3])
-#' get_minmax_combos(sm)
+#' cormat <- pmapply(iris[,c(1:4)], function(x, y) cor(x, y))
+#' get_minmax_combos(cormat)
 #'}
 get_minmax_combos <- function(combo_mat) {
   n <- dimnames(combo_mat)
@@ -34,20 +33,6 @@ get_minmax_combos <- function(combo_mat) {
               min_combo = paste(rn[minv[1,1]], cn[minv[1,2]], sep = " - "),
               min_value = combo_mat[minv[1,1], minv[1,2]]
   )
-  class(out) <- c("minmaxCombo", class(out))
+  # class(out) <- c("minmaxCombo", class(out))
   out
-}
-
-#' Print the output of get_minmax_combos
-#'
-#' @param combo_mat a matrix generated from `pmapply`
-#' @name print
-NULL
-
-#' @describeIn print Prints output of get_minmax_combos
-#' @export
-print.minmaxCombo <- function(combo_mat) {
-  cat("|", "Maximum combination: ", combo_mat$max_combo, "\t", " | ", "Value: ", combo_mat$max_value, "\n")
-  cat("|", "Minimum combination: ", combo_mat$min_combo, "\t", " | ", "Value: ", combo_mat$min_value, "\n")
-  invisible(combo_mat)
 }

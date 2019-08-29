@@ -17,8 +17,7 @@ Get the minimum and maximum combinations from pmapply matrix
 }
 \examples{
 \dontrun{
-samples <- replicate(3, sample(LETTERS, 20, replace = TRUE))
-sm <- pmapply(s1 = samples[,1], s2 = samples[,2], s3 = samples[,3])
-get_minmax_combos(sm)
+cormat <- pmapply(iris[,c(1:4)], function(x, y) cor(x, y))
+get_minmax_combos(cormat)
 }
 }

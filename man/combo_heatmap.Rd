@@ -19,8 +19,7 @@ Plot heatmap result of pmapply
 }
 \examples{
 \dontrun{
-samples <- replicate(3, sample(LETTERS, 20, replace = TRUE))
-sm <- pmapply(s1 = samples[,1], s2 = samples[,2], s3 = samples[,3])
-combo_heatmap(sm)
+cormat <- pmapply(iris[,c(1:4)], function(x, y) cor(x, y))
+combo_heatmap(cormat)
 }
 }

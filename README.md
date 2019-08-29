@@ -48,10 +48,10 @@ m <- pmapply(df1 = df1$key,
              FUN = si)
 m
 #>      df1  df2  df3  df4
-#> df1 1000  840  835  836
-#> df2  840 1000  830  833
-#> df3  835  830 1000  839
-#> df4  836  833  839 1000
+#> df1 1000  841  829  833
+#> df2  841 1000  836  831
+#> df3  829  836 1000  831
+#> df4  833  831  831 1000
 ```
 
 The resulting matrix shows the total intersections between each
@@ -61,8 +61,8 @@ Get the minimum and maximum values with `get_min_max_combos`:
 
 ``` r
 get_minmax_combos(m)
-#> | Maximum combination:  df2 - df1      |  Value:  840 
-#> | Minimum combination:  df3 - df2      |  Value:  830
+#> | Maximum combination:  df2 - df1      |  Value:  841 
+#> | Minimum combination:  df3 - df1      |  Value:  829
 ```
 
 Or plot the heatmap with `combo_heatmap`:

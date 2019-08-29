@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 ```
 # pmapply
 
-<!-- badges: start -->
+![](https://camo.githubusercontent.com/ea6e0ff99602c3563e3dd684abf60b30edceaeef/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6c6966656379636c652d6578706572696d656e74616c2d6f72616e67652e737667)
 <!-- badges: end -->
 
 The goal of pmapply is to apply a pair-wise function over a series of vectors. 
@@ -40,19 +40,15 @@ generate_keys <- function(n = 1200) {
   paste0(a, sprintf("%04d", sample(9999, n, TRUE)), sample(LETTERS, n, TRUE))
 }
 keys <- generate_keys()
-
-df1 <- data.frame(key = sample(keys, 1000))
-df2 <- data.frame(key = sample(keys, 1000))
-df3 <- data.frame(key = sample(keys, 1000))
-df4 <- data.frame(key = sample(keys, 1000))
+l <- list(
+  k1 = sample(keys, 1000),
+  k2 = sample(keys, 1000),
+  k3 = sample(keys, 1000),
+  k4 = sample(keys, 1000)
+)
 
 si <- function(x, y) sum(x %in% y)
-m <- pmapply(df1 = df1$key,
-             df2 = df2$key, 
-             df3 = df3$key,
-             df4 = df4$key,
-             show = "all",
-             FUN = si)
+m <- pmapply(l, si)
 m
 ```
 
@@ -68,6 +64,13 @@ Or plot the heatmap with `combo_heatmap`:
 
 ```{r}
 combo_heatmap(m)
+```
+
+## Example 2: Correlation Matrices
+
+```{r}
+(cormat <- pmapply(iris[,c(1:4)], function(x, y) cor(x, y)))
+combo_heatmap(cormat)
 ```
 
 

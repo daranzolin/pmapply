@@ -3,8 +3,7 @@
 
 # pmapply
 
-<!-- badges: start -->
-
+![](https://camo.githubusercontent.com/ea6e0ff99602c3563e3dd684abf60b30edceaeef/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6c6966656379636c652d6578706572696d656e74616c2d6f72616e67652e737667)
 <!-- badges: end -->
 
 The goal of pmapply is to apply a pair-wise function over a series of
@@ -33,25 +32,21 @@ generate_keys <- function(n = 1200) {
   paste0(a, sprintf("%04d", sample(9999, n, TRUE)), sample(LETTERS, n, TRUE))
 }
 keys <- generate_keys()
-
-df1 <- data.frame(key = sample(keys, 1000))
-df2 <- data.frame(key = sample(keys, 1000))
-df3 <- data.frame(key = sample(keys, 1000))
-df4 <- data.frame(key = sample(keys, 1000))
+l <- list(
+  k1 = sample(keys, 1000),
+  k2 = sample(keys, 1000),
+  k3 = sample(keys, 1000),
+  k4 = sample(keys, 1000)
+)
 
 si <- function(x, y) sum(x %in% y)
-m <- pmapply(df1 = df1$key,
-             df2 = df2$key, 
-             df3 = df3$key,
-             df4 = df4$key,
-             show = "all",
-             FUN = si)
+m <- pmapply(l, si)
 m
-#>      df1  df2  df3  df4
-#> df1 1000  841  829  833
-#> df2  841 1000  836  831
-#> df3  829  836 1000  831
-#> df4  833  831  831 1000
+#>      k1   k2   k3   k4
+#> k1 1000  833  835  835
+#> k2  833 1000  837  835
+#> k3  835  837 1000  841
+#> k4  835  835  841 1000
 ```
 
 The resulting matrix shows the total intersections between each
@@ -61,8 +56,17 @@ Get the minimum and maximum values with `get_min_max_combos`:
 
 ``` r
 get_minmax_combos(m)
-#> | Maximum combination:  df2 - df1      |  Value:  841 
-#> | Minimum combination:  df3 - df1      |  Value:  829
+#> $max_combo
+#> [1] "k4 - k3"
+#> 
+#> $max_value
+#> [1] 841
+#> 
+#> $min_combo
+#> [1] "k2 - k1"
+#> 
+#> $min_value
+#> [1] 833
 ```
 
 Or plot the heatmap with `combo_heatmap`:
@@ -72,3 +76,17 @@ combo_heatmap(m)
 ```
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+
+## Example 2: Correlation Matrices
+
+``` r
+(cormat <- pmapply(iris[,c(1:4)], function(x, y) cor(x, y)))
+#>              Sepal.Length Sepal.Width Petal.Length Petal.Width
+#> Sepal.Length    1.0000000  -0.1175698    0.8717538   0.8179411
+#> Sepal.Width    -0.1175698   1.0000000   -0.4284401  -0.3661259
+#> Petal.Length    0.8717538  -0.4284401    1.0000000   0.9628654
+#> Petal.Width     0.8179411  -0.3661259    0.9628654   1.0000000
+combo_heatmap(cormat)
+```
+
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
